@@ -10,14 +10,10 @@ env:
 builds:
 - goos:
   - linux
-  - darwin
-  - windows
   goarch:
   - amd64
   targets:
   - linux_amd64
-  - darwin_amd64
-  - windows_amd64
   main: .
   ldflags:
   - -s -w -I=/lib64/ld-linux-x86-64.so.2
