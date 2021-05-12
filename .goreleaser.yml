@@ -1,0 +1,53 @@
+project_name: waypoint-plugin-nix
+release:
+  github:
+    owner: juliosueiras-nix
+    name: waypoint-nix
+  name_template: '{{.Tag}}'
+env:
+  - GO111MODULE=on
+  - CGO_ENABLED=0
+builds:
+- goos:
+  - linux
+  - darwin
+  - windows
+  goarch:
+  - amd64
+  targets:
+  - linux_amd64
+  - darwin_amd64
+  - windows_amd64
+  main: .
+  ldflags:
+  - -s -w -I=/lib64/ld-linux-x86-64.so.2
+  binary: waypoint-plugin-nix
+  lang: go
+archives:
+  - id: waypoint-plugin-nix
+    name_template: '{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}{{ if .Arm
+      }}v{{ .Arm }}{{ end }}'
+    format: tar.gz
+    files:
+    - licence*
+    - LICENCE*
+    - license*
+    - LICENSE*
+    - readme*
+    - README*
+    - changelog*
+    - CHANGELOG*
+snapshot:
+  name_template: SNAPSHOT-{{ .Commit }}
+checksum:
+  name_template: '{{ .ProjectName }}_{{ .Version }}_checksums.txt'
+dist: dist
+signs:
+  - cmd: gpg
+    args:
+    - --output
+    - $signature
+    - --detach-sig
+    - $artifact
+    signature: ${artifact}.sig
+    artifacts: none
