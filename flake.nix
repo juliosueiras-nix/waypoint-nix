@@ -33,7 +33,7 @@
           vendorSha256 = "CcJjFMslSUiZMM0LLMM3BR53YMxyWk8m7hxjMI9tduE=";
         };
 
-        defaultPackage = pkgs.buildGo114Module {
+        packages.waypoint-plugin-nix = pkgs.buildGo114Module {
           name = "waypoint-nix";
 
           src = pkgs.lib.sourceFilesBySuffices ./. [
@@ -54,6 +54,8 @@
             mv $out/bin/waypoint-nix $out/bin/waypoint-plugin-nix
           '';
         };
+
+        defaultPackage = self.packages."${system}".waypoint-plugin-nix;
 
         devShell = pkgs.mkShell {
           NIX_PATH = "nixpkgs=${nixpkgs}";
