@@ -1,1 +1,1 @@
-(import ./default.nix).defaultNix.packages
+(import ./default.nix {}).defaultNix.packages
