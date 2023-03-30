@@ -5,7 +5,7 @@ app "web" {
     use "nix" {
       image = "simple-python"
       tag   = "latest"
-      nix_file = "./examples/simple/default.nix"
+      nix_file = "${path.app}/default.nix"
     }
   }
 
