@@ -6,6 +6,11 @@ in dockerTools.buildImage {
   name = "simple-python";
   tag = "latest";
 
+  contents = [
+    coreutils
+    bashInteractive
+  ];
+
   config = {
     Entrypoint = [ 
       "${waypointEntrypoint}/bin/waypoint-entrypoint"
